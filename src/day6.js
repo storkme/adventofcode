@@ -1,9 +1,3 @@
-var fns = {
-    'turn on': (a, x, y)=>a[x * 1000 + y] = true,
-    'turn off': (a, x, y)=>a[x * 1000 + y] = false,
-    'toggle': (a, x, y)=>a[x * 1000 + y] = !a[x * 1000 + y]
-};
-
 //part 1
 document.body.innerText.trim().split('\n')
     .map(s=>s.match(/(.*?) (\d+),(\d+) through (\d+),(\d+)/))
@@ -11,7 +5,11 @@ document.body.innerText.trim().split('\n')
     .reduce((a, n) => {
         for (var x = n[1]; x <= n[3]; x++)
             for (var y = n[2]; y <= n[4]; y++)
-                fns[n[0]](a, x, y)
+                ({
+                    'turn on': (a, x, y)=>a[x * 1000 + y] = true,
+                    'turn off': (a, x, y)=>a[x * 1000 + y] = false,
+                    'toggle': (a, x, y)=>a[x * 1000 + y] = !a[x * 1000 + y]
+                })[n[0]](a, x, y)
         return a;
     }, new Array(1000000).fill(false))
     .reduce((a, n) => a + (n ? 1 : 0), 0);
