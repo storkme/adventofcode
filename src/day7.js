@@ -1,7 +1,7 @@
 /**
  * Created by stork on 07/12/2015.
  */
-//part 1
+
 (function e(c, s) {
     var i = parseInt(s);
     if (Array.isArray(s)) {
